@@ -1,0 +1,9 @@
+﻿<Window x:Class="_01_KinectInteractionCS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Width="1200" SizeToContent="Height">
+    <StackPanel Orientation="Vertical">
+        <DataGrid x:Name="Grid" Height="90" FontSize="16" AutoGeneratingColumn="Grid_AutoGeneratingColumn" />
+        <Image x:Name="ImageRgb" Width="640" Height="480"/>
+    </StackPanel>
+</Window>
