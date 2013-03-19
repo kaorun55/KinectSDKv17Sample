@@ -4,6 +4,8 @@
         Title="MainWindow" Width="1200" SizeToContent="Height">
     <StackPanel Orientation="Vertical">
         <DataGrid x:Name="Grid" Height="90" FontSize="16" AutoGeneratingColumn="Grid_AutoGeneratingColumn" />
+        <TextBlock x:Name="TextRightPoint" FontSize="16"/>
+        <TextBlock x:Name="TextLeftPoint" FontSize="16"/>
         <Image x:Name="ImageRgb" Width="640" Height="480"/>
     </StackPanel>
 </Window>
