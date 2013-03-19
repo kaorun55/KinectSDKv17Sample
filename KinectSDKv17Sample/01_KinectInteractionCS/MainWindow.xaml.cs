@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace _01_KinectInteractionCS
 {
@@ -35,6 +36,7 @@ namespace _01_KinectInteractionCS
                 {
                     IsGripTarget = true,
                 };
+
             }
         }
 
