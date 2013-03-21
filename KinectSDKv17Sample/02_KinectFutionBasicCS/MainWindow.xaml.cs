@@ -219,7 +219,7 @@ namespace _02_KinectFutionBasicCS
                     volume.GetCurrentWorldToCameraTransform() );
                 if ( !trackingSucceeded ) {
                     // 一定数エラーになったらリセット
-                    // Kinect(または対象)を素早く動かしすぎ などの場合
+                    // Kinectまたは対象を素早く動かしすぎ などの場合
                     trackingErrorCount++;
                     if ( trackingErrorCount >= 100 ) {
                         Trace.WriteLine( @"tracking error." );

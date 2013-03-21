@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KinectInteractionCS", "0
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_KinectInteractionCpp", "01_KinectInteractionCpp\01_KinectInteractionCpp.vcxproj", "{478E35C4-B527-4518-8827-57E3FA7F7782}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_KinectFutionBasicCS", "02_KinectFutionBasicCS\02_KinectFutionBasicCS.csproj", "{B41AB28E-28C7-4093-B9EB-15AA5FCCA2F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_KinectFusionBasicCS", "02_KinectFutionBasicCS\02_KinectFusionBasicCS.csproj", "{B41AB28E-28C7-4093-B9EB-15AA5FCCA2F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
