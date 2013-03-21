@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_KinectFusionBasicCS", "0
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_KinectFusionBasicCpp", "02_KinectFusionBasicCpp\02_KinectFusionBasicCpp.vcxproj", "{74AF2F23-9569-42AB-B8D4-419DB69A7BB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_KinectFusionBasicCS", "03_KinectFusionBasicCS\03_KinectFusionBasicCS.csproj", "{C5CC606C-D67F-474A-AE90-74A5922B470F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{74AF2F23-9569-42AB-B8D4-419DB69A7BB8}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{74AF2F23-9569-42AB-B8D4-419DB69A7BB8}.Release|Win32.ActiveCfg = Release|Win32
 		{74AF2F23-9569-42AB-B8D4-419DB69A7BB8}.Release|Win32.Build.0 = Release|Win32
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C5CC606C-D67F-474A-AE90-74A5922B470F}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
