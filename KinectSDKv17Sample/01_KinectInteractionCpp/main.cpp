@@ -209,23 +209,23 @@ private:
         ERROR_CHECK( stream->ProcessSkeleton( NUI_SKELETON_COUNT, skeletonFrame.SkeletonData, &reading, skeletonFrame.liTimeStamp ) );
     }
 
-void processInteraction()
-{
-    // インタラクションフレームを取得する
-    NUI_INTERACTION_FRAME interactionFrame = { 0 } ;
-    auto ret = stream->GetNextFrame( 0, &interactionFrame );
-    if ( ret != S_OK ) {
-        return;
-    }
+    void processInteraction()
+    {
+        // インタラクションフレームを取得する
+        NUI_INTERACTION_FRAME interactionFrame = { 0 } ;
+        auto ret = stream->GetNextFrame( 0, &interactionFrame );
+        if ( ret != S_OK ) {
+            return;
+        }
 
-    for ( auto user : interactionFrame.UserInfos ) {
-        if ( user.SkeletonTrackingId != 0 ) {
-            for ( auto hand : user.HandPointerInfos ) {
-                std::cout << EventTypeToString( hand.HandEventType ) << " " << std::endl;
+        for ( auto user : interactionFrame.UserInfos ) {
+            if ( user.SkeletonTrackingId != 0 ) {
+                for ( auto hand : user.HandPointerInfos ) {
+                    std::cout << EventTypeToString( hand.HandEventType ) << " " << std::endl;
+                }
             }
         }
     }
-}
 
     std::string EventTypeToString( NUI_HAND_EVENT_TYPE eventType )
     {
