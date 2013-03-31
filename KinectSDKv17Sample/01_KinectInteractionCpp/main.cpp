@@ -24,21 +24,25 @@ public:
 
     HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppv)
     {
+        std::cout << __FUNCTION__ << std::endl;
         return S_OK;
     }
 
     ULONG STDMETHODCALLTYPE AddRef()
     {
+        std::cout << __FUNCTION__ << std::endl;
         return 1;
     }
 
     ULONG STDMETHODCALLTYPE Release()
     {
+        std::cout << __FUNCTION__ << std::endl;
         return 0;
     }
 
     HRESULT STDMETHODCALLTYPE GetInteractionInfoAtLocation(DWORD skeletonTrackingId, NUI_HAND_TYPE handType, FLOAT x, FLOAT y, _Out_ NUI_INTERACTION_INFO *pInteractionInfo)
     {
+        //std::cout << __FUNCTION__ << std::endl;
         pInteractionInfo->IsGripTarget = TRUE;
         return S_OK;
     }
@@ -201,7 +205,13 @@ private:
     {
         // スケルトンのフレームを取得する
         NUI_SKELETON_FRAME skeletonFrame = { 0 };
-        kinect->NuiSkeletonGetNextFrame( 0, &skeletonFrame );
+        auto ret = kinect->NuiSkeletonGetNextFrame( 0, &skeletonFrame );
+        if ( ret != S_OK ) {
+            std::cout << "not skeleton!!" << std::endl;
+            return;
+        }
+
+        //std::cout << "skeleton!!" << std::endl;
 
         // スケルトンデータを設定する
         Vector4 reading = { 0 };
@@ -215,13 +225,18 @@ private:
         NUI_INTERACTION_FRAME interactionFrame = { 0 } ;
         auto ret = stream->GetNextFrame( 0, &interactionFrame );
         if ( ret != S_OK ) {
+            std::cout << "not interaction!!" << std::endl;
             return;
         }
+
+        //std::cout << "interaction!!" << std::endl;
 
         for ( auto user : interactionFrame.UserInfos ) {
             if ( user.SkeletonTrackingId != 0 ) {
                 for ( auto hand : user.HandPointerInfos ) {
-                    std::cout << EventTypeToString( hand.HandEventType ) << " " << std::endl;
+                    if ( hand.HandEventType != NUI_HAND_EVENT_TYPE::NUI_HAND_EVENT_TYPE_NONE ) {
+                        std::cout << EventTypeToString( hand.HandEventType ) << " " << std::endl;
+                    }
                 }
             }
         }
