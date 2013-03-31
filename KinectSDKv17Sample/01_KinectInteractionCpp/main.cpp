@@ -1,3 +1,4 @@
+// http://social.msdn.microsoft.com/Forums/ja-JP/kinectsdknuiapi/thread/e4f5a696-ed4f-4a5f-8e54-4b3706f62ad0
 #include <iostream>
 
 #include <Windows.h>
@@ -109,7 +110,7 @@ public:
 
         // インタラクションライブラリの初期化
         ERROR_CHECK( ::NuiCreateInteractionStream( kinect, &adapter, &stream ) );
-        stream->Enable( 0 );
+        ERROR_CHECK( stream->Enable( 0 ) );
     }
 
     void run()
@@ -163,7 +164,7 @@ private:
     {
         // RGBカメラのフレームデータを取得する
         NUI_IMAGE_FRAME imageFrame = { 0 };
-        ERROR_CHECK( kinect->NuiImageStreamGetNextFrame( imageStreamHandle, INFINITE, &imageFrame ) );
+        ERROR_CHECK( kinect->NuiImageStreamGetNextFrame( imageStreamHandle, 0, &imageFrame ) );
 
         // 画像データを取得する
         NUI_LOCKED_RECT colorData;
@@ -185,21 +186,22 @@ private:
         // フレームデータを元に、拡張距離データを取得する
 		BOOL nearMode = FALSE;
 		INuiFrameTexture *frameTexture = 0;
-		kinect->NuiImageFrameGetDepthImagePixelFrameTexture( depthStreamHandle, &depthFrame, &nearMode, &frameTexture );
+		ERROR_CHECK( kinect->NuiImageFrameGetDepthImagePixelFrameTexture( depthStreamHandle, &depthFrame, &nearMode, &frameTexture ) );
 
         // 距離データを取得する
         NUI_LOCKED_RECT depthData = { 0 };
         frameTexture->LockRect( 0, &depthData, 0, 0 );
-        if ( depthData.Pitch == 0 ) {
-            std::cout << "zero" << std::endl;
-        }
 
         // Depthデータを設定する
         ERROR_CHECK( stream->ProcessDepth( depthData.size, depthData.pBits, depthFrame.liTimeStamp ) );
 
         // フレームデータを解放する
+        frameTexture->UnlockRect( 0 );
         ERROR_CHECK( kinect->NuiImageStreamReleaseFrame( depthStreamHandle, &depthFrame ) );
     }
+
+
+    LARGE_INTEGER skeletonTimeStamp;
 
     void processSkeleton()
     {
@@ -214,9 +216,10 @@ private:
         //std::cout << "skeleton!!" << std::endl;
 
         // スケルトンデータを設定する
+        skeletonTimeStamp = skeletonFrame.liTimeStamp;
         Vector4 reading = { 0 };
-        kinect->NuiAccelerometerGetCurrentReading( &reading );
-        ERROR_CHECK( stream->ProcessSkeleton( NUI_SKELETON_COUNT, skeletonFrame.SkeletonData, &reading, skeletonFrame.liTimeStamp ) );
+        ERROR_CHECK( kinect->NuiAccelerometerGetCurrentReading( &reading ) );
+        ERROR_CHECK( stream->ProcessSkeleton( NUI_SKELETON_COUNT, skeletonFrame.SkeletonData, &reading, skeletonTimeStamp ) );
     }
 
     void processInteraction()
@@ -225,7 +228,13 @@ private:
         NUI_INTERACTION_FRAME interactionFrame = { 0 } ;
         auto ret = stream->GetNextFrame( 0, &interactionFrame );
         if ( ret != S_OK ) {
-            std::cout << "not interaction!!" << std::endl;
+            if ( ret == E_POINTER ) {
+                std::cout << "E_POINTER" << std::endl;
+            }
+            else if ( ret == E_NUI_FRAME_NO_DATA ) {
+                std::cout << "E_NUI_FRAME_NO_DATA" << std::endl;
+            }
+
             return;
         }
 
