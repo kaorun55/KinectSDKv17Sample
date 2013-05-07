@@ -249,6 +249,14 @@ namespace _02_KinectFutionBasicCS
 
                 ImageKinectFusion.Source = BitmapSource.Create( DepthWidth, DepthHeight, 96, 96,
                     PixelFormats.Bgr32, null, colorPixels, DepthWidth * 4 );
+
+                // カメラ座標のマトリックスをダンプ
+                var m = volume.GetCurrentWorldToCameraTransform();
+                Trace.WriteLine( string.Format( "{0},{1},{2},{3}", m.M11, m.M12, m.M13, m.M14 ) );
+                Trace.WriteLine( string.Format( "{0},{1},{2},{3}", m.M21, m.M22, m.M23, m.M24 ) );
+                Trace.WriteLine( string.Format( "{0},{1},{2},{3}", m.M31, m.M32, m.M33, m.M34 ) );
+                Trace.WriteLine( string.Format( "{0},{1},{2},{3}", m.M41, m.M42, m.M43, m.M44 ) );
+                Trace.WriteLine( string.Format( "" ) );
             }
             catch ( Exception ex ) {
                 Trace.WriteLine( ex.Message );
