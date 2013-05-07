@@ -36,7 +36,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.Kinect, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Kinect.Toolkit.Fusion">
-      <HintPath>..\..\..\..\C#\Microsoft.Kinect.Toolkit.Fusion\bin\Debug\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
+      <HintPath>..\libs\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
