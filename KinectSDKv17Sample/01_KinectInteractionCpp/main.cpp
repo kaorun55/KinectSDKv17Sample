@@ -177,6 +177,9 @@ private:
         ERROR_CHECK( kinect->NuiImageStreamReleaseFrame( imageStreamHandle, &imageFrame ) );
     }
 
+    std::vector<unsigned char> buffer;
+
+    // http://social.msdn.microsoft.com/Forums/en-US/kinectsdknuiapi/thread/e4f5a696-ed4f-4a5f-8e54-4b3706f62ad0
     void processDepth()
     {
         // 距離カメラのフレームデータを取得する
@@ -193,7 +196,12 @@ private:
         frameTexture->LockRect( 0, &depthData, 0, 0 );
 
         // Depthデータを設定する
-        ERROR_CHECK( stream->ProcessDepth( depthData.size, depthData.pBits, depthFrame.liTimeStamp ) );
+        buffer.resize( depthData.size );
+        if ( depthData.Pitch ) {
+            memcpy( &buffer[0], depthData.pBits, buffer.size() );
+        }
+
+        ERROR_CHECK( stream->ProcessDepth( buffer.size(), &buffer[0], depthFrame.liTimeStamp ) );
 
         // フレームデータを解放する
         frameTexture->UnlockRect( 0 );
