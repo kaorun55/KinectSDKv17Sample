@@ -208,6 +208,7 @@ private:
         ERROR_CHECK( kinect->NuiImageStreamReleaseFrame( depthStreamHandle, &depthFrame ) );
     }
 
+    std::vector<NUI_SKELETON_DATA> skeletons;
 
     LARGE_INTEGER skeletonTimeStamp;
 
@@ -222,6 +223,12 @@ private:
         }
 
         //std::cout << "skeleton!!" << std::endl;
+
+        if ( skeletons.size() != 6 ) {
+            skeletons.resize( 6 );
+        }
+
+            memcpy( &skeletons[0], skeletonFrame.SkeletonData, sizeof(NUI_SKELETON_DATA) * 6 );
 
         // スケルトンデータを設定する
         skeletonTimeStamp = skeletonFrame.liTimeStamp;
