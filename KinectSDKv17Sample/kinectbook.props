@@ -9,7 +9,7 @@
       <AdditionalIncludeDirectories>$(KINECTSDK10_DIR)inc;$(KINECT_TOOLKIT_DIR)inc;C:\OpenCV\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>Kinect10.lib;FaceTrackLib.lib;KinectFusion170_32.lib;KinectInteraction170_32.lib;opencv_core245d.lib;opencv_highgui245d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Kinect10.lib;FaceTrackLib.lib;KinectFusion170_32.lib;KinectInteraction170_32.lib;opencv_core246d.lib;opencv_highgui246d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(KINECTSDK10_DIR)lib\x86;$(KINECT_TOOLKIT_DIR)lib\x86;C:\OpenCV\build\x86\vc11\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

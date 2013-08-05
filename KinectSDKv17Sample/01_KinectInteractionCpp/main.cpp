@@ -32,19 +32,23 @@ public:
     ULONG STDMETHODCALLTYPE AddRef()
     {
         std::cout << __FUNCTION__ << std::endl;
-        return 1;
+        return 2;
     }
 
     ULONG STDMETHODCALLTYPE Release()
     {
         std::cout << __FUNCTION__ << std::endl;
-        return 0;
+        return 1;
     }
 
     HRESULT STDMETHODCALLTYPE GetInteractionInfoAtLocation(DWORD skeletonTrackingId, NUI_HAND_TYPE handType, FLOAT x, FLOAT y, _Out_ NUI_INTERACTION_INFO *pInteractionInfo)
     {
         //std::cout << __FUNCTION__ << std::endl;
-        pInteractionInfo->IsGripTarget = TRUE;
+		pInteractionInfo->IsGripTarget          = true;
+        pInteractionInfo->IsPressTarget         = false;
+		pInteractionInfo->PressTargetControlId  = 0;
+		pInteractionInfo->PressAttractionPointX = 0.0f;
+		pInteractionInfo->PressAttractionPointY = 0.0f;
         return S_OK;
     }
 };
@@ -228,13 +232,12 @@ private:
             skeletons.resize( 6 );
         }
 
-            memcpy( &skeletons[0], skeletonFrame.SkeletonData, sizeof(NUI_SKELETON_DATA) * 6 );
+        memcpy( &skeletons[0], skeletonFrame.SkeletonData, sizeof(NUI_SKELETON_DATA) * 6 );
 
         // スケルトンデータを設定する
-        skeletonTimeStamp = skeletonFrame.liTimeStamp;
         Vector4 reading = { 0 };
         ERROR_CHECK( kinect->NuiAccelerometerGetCurrentReading( &reading ) );
-        ERROR_CHECK( stream->ProcessSkeleton( NUI_SKELETON_COUNT, skeletonFrame.SkeletonData, &reading, skeletonTimeStamp ) );
+        ERROR_CHECK( stream->ProcessSkeleton( NUI_SKELETON_COUNT, &skeletons[0], &reading, skeletonFrame.liTimeStamp ) );
     }
 
     void processInteraction()
